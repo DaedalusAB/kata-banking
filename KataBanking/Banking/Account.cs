@@ -11,17 +11,22 @@ namespace Banking
 
         private const string Header = "Date\t\tAmmount\t\tBalance";
 
+        private int Balance =>
+            _transactions.Any()
+                ? _transactions.Last().Ammount
+                : 0;
+
         public Account()
         {
             _transactions = new List<Transaction>();
         }
 
         public void Deposit(int ammount) =>
-           _transactions.Add(new Transaction(DateTime.Now, ammount, RunningBalance() + ammount));
+           _transactions.Add(new Transaction(DateTime.Now, ammount, Balance + ammount));
 
         public void Withdraw(int ammount)
         {
-            var balance = RunningBalance();
+            var balance = Balance;
 
             if (balance < ammount)
             {
@@ -30,9 +35,6 @@ namespace Banking
 
             _transactions.Add(new Transaction(DateTime.Now, -ammount, balance - ammount));
         }
-
-        public int RunningBalance() =>
-            _transactions.Sum(t => t.Ammount);
 
         public string PrintStatement()
         {
@@ -44,7 +46,5 @@ namespace Banking
 
             return sb.ToString();
         }
-
-        
     }
 }
