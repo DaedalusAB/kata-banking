@@ -65,11 +65,11 @@ namespace BankingTests
         public void WithdrawMoneyFromAccoun_WhenThereIsNotEnoughMoney()
         {
             var account = new Account();
-            var ammount2 = 50;
+            var ammount = 50;
 
-            Assert.Throws<ArgumentException>(() => account.Withdraw(ammount2));
+            Assert.Throws<ArgumentException>(() => account.Withdraw(ammount));
             Assert.DoesNotContain(
-                StatementLine(DateTime.Now, -ammount2, -ammount2),
+                StatementLine(DateTime.Now, -ammount, -ammount),
                 account.PrintStatement()
                 );
 
