@@ -10,13 +10,7 @@ namespace BankingTests
     public class AccountTests
     {
         private const string DateTimeFormat = "dd/MM/yyyy";
-        private readonly ITestOutputHelper _output;
-
-        public AccountTests(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-
+        
         [Fact]
         public void DepositMoneyIntoAccount()
         {
@@ -66,8 +60,19 @@ namespace BankingTests
                 StatementLine(DateTime.Now, -ammount2, ammount1 - ammount2),
                 account.PrintStatement()
             );
+        }
+        [Fact]
+        public void WithdrawMoneyFromAccoun_WhenThereIsNotEnoughMoney()
+        {
+            var account = new Account();
+            var ammount2 = 50;
 
-           _output.WriteLine(account.PrintStatement());
+            Assert.Throws<ArgumentException>(() => account.Withdraw(ammount2));
+            Assert.DoesNotContain(
+                StatementLine(DateTime.Now, -ammount2, -ammount2),
+                account.PrintStatement()
+                );
+
         }
 
         private static string StatementLine(DateTime date, int ammount, int balance)
