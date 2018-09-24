@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Banking
 {
-    public class Statement
+    public class Statement : IEnumerable<Transaction>
     {
         public int Balance =>
             _transactions.Sum(t => t.Amount);
@@ -29,16 +29,14 @@ namespace Banking
             _transactions.Add(new Transaction(DateTime.Now, -amount, Balance));
         }
 
-        public string PrintStatement()
+        public IEnumerator<Transaction> GetEnumerator()
         {
-            var sb = new StringBuilder();
-            sb.Append("Date\t\tAmount\t\tBalance" + Environment.NewLine);
-            foreach (var transaction in _transactions)
-            {
-                sb.Append(transaction.Date + "\t\t" + transaction.Amount + "\t\t" + transaction.Balance + Environment.NewLine);
-            }
+            return _transactions.GetEnumerator();
+        }
 
-            return sb.ToString();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
