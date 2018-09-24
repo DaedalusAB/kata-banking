@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Banking
 {
@@ -14,17 +13,17 @@ namespace Banking
             Statement = new Statement();
         }
 
-        public void Deposit(int ammount)
+        public void Deposit(int amount)
         {
-            Statement.AddTransaction(ammount);
+            Statement.AddTransaction(amount);
         }
 
-        public void Withdraw(int withdrwAmmount)
+        public void Withdraw(int withdrwAmount)
         {
-            if(Statement.Balance < withdrwAmmount) 
+            if(Statement.Balance < withdrwAmount) 
                 throw new Exception();
 
-            Statement.AddTransaction(-withdrwAmmount);
+            Statement.AddTransaction(-withdrwAmount);
         }
     }
 }

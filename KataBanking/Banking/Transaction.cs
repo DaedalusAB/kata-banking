@@ -5,13 +5,13 @@ namespace Banking
     internal class Transaction
     {
         public DateTime Date { get; }
-        public int Ammount { get; }
+        public int Amount { get; }
         public int Balance { get; }
 
-        public Transaction(DateTime date, int ammount, int balance)
+        public Transaction(DateTime date, int amount, int balance)
         {
             Date = date;
-            Ammount = ammount;
+            Amount = amount;
             Balance = balance;
         }
     }

@@ -7,17 +7,17 @@ namespace Banking
     internal class Statement
     {
         public int Balance =>
-            _transactions.Sum(t => t.Ammount);
-        private List<Transaction> _transactions;
+            _transactions.Sum(t => t.Amount);
+        private readonly List<Transaction> _transactions;
 
         public Statement()
         {
             _transactions = new List<Transaction>();
         }
 
-        public void AddTransaction(int ammount)
+        public void AddTransaction(int amount)
         {
-            _transactions.Add(new Transaction(DateTime.Now, ammount, Balance));
+            _transactions.Add(new Transaction(DateTime.Now, amount, Balance));
         }
     }
 }
