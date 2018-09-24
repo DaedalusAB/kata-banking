@@ -14,7 +14,7 @@ namespace BankingTests
             var transactions = new List<Transaction>();
 
             var printedStatement = printer.Print(transactions);
-            var expectedStatement = StatementPrinter.Header;
+            var expectedStatement = StatementPrinter.HeaderFormat;
 
             Assert.Equal(expectedStatement, printedStatement);
         }
@@ -32,7 +32,7 @@ namespace BankingTests
 
             var printedStatement = printer.Print(transactions);
             var expectedStatement = 
-                StatementPrinter.Header 
+                StatementPrinter.HeaderFormat 
                 + Environment.NewLine + PrintedTransaction(transaction);
 
 
@@ -55,7 +55,7 @@ namespace BankingTests
 
             var printedStatement = printer.Print(transactions);
             var expectedStatement = 
-                StatementPrinter.Header
+                StatementPrinter.HeaderFormat
                 + Environment.NewLine + PrintedTransaction(depositTransaction)
                 + Environment.NewLine + PrintedTransaction(withdrawTransaction);
 
@@ -65,7 +65,7 @@ namespace BankingTests
 
         private string PrintedTransaction(Transaction transaction)
         {
-            return string.Format(StatementPrinter.Format, transaction.Date, transaction.Amount, transaction.Balance);
+            return string.Format(StatementPrinter.RowFormat, transaction.Date, transaction.Amount, transaction.Balance);
         }
     }
 }
