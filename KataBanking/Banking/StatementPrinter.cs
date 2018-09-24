@@ -11,16 +11,14 @@ namespace Banking
 
         public string Print(IEnumerable<Transaction> transactions)
         {
-            if(transactions == null) 
+            if (transactions == null)
                 throw new ArgumentNullException(nameof(transactions));
 
             var sb = new StringBuilder();
             sb.Append(Header);
             foreach (var transaction in transactions)
-            {
-                sb.Append(Environment.NewLine +
-                          string.Format(Format, transaction.Date, transaction.Amount, transaction.Balance));
-            }
+                sb.Append(Environment.NewLine + string.Format(Format, transaction.Date, transaction.Amount, transaction.Balance));
+
 
             return sb.ToString();
         }
