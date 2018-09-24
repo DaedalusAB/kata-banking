@@ -9,6 +9,7 @@ namespace Banking
     {
         public int Balance =>
             _transactions.Sum(t => t.Amount);
+
         private readonly List<Transaction> _transactions;
 
         public Statement()

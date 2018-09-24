@@ -19,7 +19,7 @@ namespace Banking
             foreach (var transaction in transactions)
             {
                 sb.Append(Environment.NewLine +
-                          String.Format(Format, transaction.Date, transaction.Amount, transaction.Balance));
+                          string.Format(Format, transaction.Date, transaction.Amount, transaction.Balance));
             }
 
             return sb.ToString();
