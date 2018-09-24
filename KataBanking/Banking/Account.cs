@@ -1,29 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Banking
 {
     public class Account
     {
-        private Statement Statement { get; }
         public int Balance =>
-            Statement.Balance;
+            _transactions.Sum(t => t.Amount);
+        private readonly List<Transaction> _transactions;
 
         public Account()
         {
-            Statement = new Statement();
+            _transactions = new List<Transaction>();
         }
 
         public void Deposit(int amount)
         {
-            Statement.AddTransaction(amount);
+            _transactions.Add(new Transaction(DateTime.Now, amount, Balance));
         }
 
-        public void Withdraw(int withdrwAmount)
+        public void Withdraw(int amount)
         {
-            if(Statement.Balance < withdrwAmount) 
+            if(Balance < amount) 
                 throw new Exception();
 
-            Statement.AddTransaction(-withdrwAmount);
+            _transactions.Add(new Transaction(DateTime.Now, -amount, Balance));
         }
     }
 }
